@@ -1,0 +1,101 @@
+<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <option name="RIGHT_MARGIN" value="80" />
+    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="true" />
+    <ClojureCodeStyleSettings>
+      <option name="alignBindingForms" value="true" />
+      <option name="commentAlignColumn" value="80" />
+    </ClojureCodeStyleSettings>
+    <HTMLCodeStyleSettings>
+      <option name="HTML_KEEP_WHITESPACES" value="true" />
+      <option name="HTML_ALIGN_TEXT" value="true" />
+    </HTMLCodeStyleSettings>
+    <Properties>
+      <option name="KEEP_BLANK_LINES" value="true" />
+    </Properties>
+    <ScalaCodeStyleSettings>
+      <option name="sortAsScalastyle" value="true" />
+      <option name="ALIGN_EXTENDS_WITH" value="1" />
+      <option name="ALIGN_IN_COLUMNS_CASE_BRANCH" value="true" />
+      <option name="INDENT_FIRST_PARAMETER_CLAUSE" value="true" />
+      <option name="SCALAFMT_REFORMAT_ON_FILES_SAVE" value="true" />
+      <option name="FORMATTER" value="1" />
+      <option name="KEEP_ONE_LINE_LAMBDAS_IN_ARG_LIST" value="true" />
+      <option name="ALIGN_PARAMETER_TYPES_IN_MULTILINE_DECLARATIONS" value="2" />
+      <option name="MULTILINE_STRING_CLOSING_QUOTES_ON_NEW_LINE" value="true" />
+      <option name="SD_BLANK_LINE_AFTER_PARAMETERS_COMMENTS" value="true" />
+      <option name="SD_BLANK_LINE_AFTER_RETURN_COMMENTS" value="true" />
+      <option name="SD_BLANK_LINE_BETWEEN_PARAMETERS" value="true" />
+      <option name="SD_BLANK_LINE_BEFORE_PARAMETERS" value="true" />
+      <option name="SD_KEEP_BLANK_LINES_BETWEEN_TAGS" value="true" />
+    </ScalaCodeStyleSettings>
+    <Shell_Script>
+      <option name="SWITCH_CASES_INDENTED" value="true" />
+    </Shell_Script>
+    <codeStyleSettings language="HTML">
+      <option name="RIGHT_MARGIN" value="140" />
+      <option name="SOFT_MARGINS" value="80,120" />
+    </codeStyleSettings>
+    <codeStyleSettings language="JAVA">
+      <option name="RIGHT_MARGIN" value="80" />
+      <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
+      <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+      <option name="ALIGN_MULTILINE_RESOURCES" value="false" />
+      <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
+      <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
+      <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
+      <option name="SPACE_AROUND_UNARY_OPERATOR" value="true" />
+      <option name="CALL_PARAMETERS_WRAP" value="5" />
+      <option name="CALL_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
+      <option name="METHOD_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
+      <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
+      <option name="RESOURCE_LIST_RPAREN_ON_NEXT_LINE" value="true" />
+      <option name="THROWS_KEYWORD_WRAP" value="1" />
+      <option name="METHOD_CALL_CHAIN_WRAP" value="5" />
+      <option name="TERNARY_OPERATION_WRAP" value="5" />
+      <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
+      <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
+      <option name="KEEP_SIMPLE_LAMBDAS_IN_ONE_LINE" value="true" />
+      <option name="KEEP_SIMPLE_CLASSES_IN_ONE_LINE" value="true" />
+      <option name="ARRAY_INITIALIZER_WRAP" value="5" />
+      <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
+      <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
+      <option name="IF_BRACE_FORCE" value="3" />
+      <option name="DOWHILE_BRACE_FORCE" value="3" />
+      <option name="WHILE_BRACE_FORCE" value="3" />
+      <option name="FOR_BRACE_FORCE" value="3" />
+      <option name="VARIABLE_ANNOTATION_WRAP" value="5" />
+      <option name="ENUM_CONSTANTS_WRAP" value="5" />
+    </codeStyleSettings>
+    <codeStyleSettings language="JSON">
+      <option name="RIGHT_MARGIN" value="100" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Properties">
+      <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Rust">
+      <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
+    </codeStyleSettings>
+    <codeStyleSettings language="Scala">
+      <option name="CLASS_BRACE_STYLE" value="5" />
+      <option name="METHOD_BRACE_STYLE" value="5" />
+      <option name="ALIGN_MULTILINE_CHAINED_METHODS" value="true" />
+      <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+      <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
+      <option name="ALIGN_MULTILINE_PARENTHESIZED_EXPRESSION" value="true" />
+      <option name="ALIGN_GROUP_FIELD_DECLARATIONS" value="true" />
+      <option name="PREFER_PARAMETERS_WRAP" value="true" />
+      <option name="METHOD_PARAMETERS_WRAP" value="5" />
+      <option name="METHOD_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
+      <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
+      <option name="EXTENDS_KEYWORD_WRAP" value="1" />
+      <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
+      <option name="BINARY_OPERATION_WRAP" value="1" />
+      <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
+      <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
+      <option name="DOWHILE_BRACE_FORCE" value="1" />
+      <option name="WHILE_BRACE_FORCE" value="1" />
+      <option name="FOR_BRACE_FORCE" value="1" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>

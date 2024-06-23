@@ -1,0 +1,5 @@
+# プロジェクトの除外パス
+/project/project/target/
+/project/target/
+/target/
+/target/scala-3.4.2/classes/
