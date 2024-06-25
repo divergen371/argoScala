@@ -1,3 +1,5 @@
+import java.security.{MessageDigest, SecureRandom}
+
 /** 楕円曲線を表すクラス。
   *
   * @param a
@@ -9,14 +11,55 @@
   */
 class EllipticCurve(a: BigInt, b: BigInt, p: BigInt) {
 
-  /** スカラー倍（点の乗算)・二重加算法を使用して、楕円曲線上の点をスカラー倍する。
+  /** 鍵ペアを生成。
+    *
+    * @param basePoint
+    *   基点
+    * @return
+    *   秘密鍵と公開鍵のペア
+    */
+  def generateKeyPair(basePoint: Point): (BigInt, Point) = {
+    val privateKey = generateRandomScalar()
+    val publicKey = scalarMultiply(privateKey, basePoint)
+    (privateKey, publicKey)
+  }
+
+  /** メッセージの暗号化。
+    *
+    * @param publicKey
+    *   受信者の公開鍵
+    * @param message
+    *   暗号化するメッセージ（点として表現）
+    * @return
+    *   暗号化されたメッセージ（点のペア）
+    */
+  def encrypt(
+      publicKey: Point,
+      message: Point,
+      basePoint: Point
+  ): (Point, Point) = {
+    val k = generateRandomScalar()
+    val c1 = scalarMultiply(k, basePoint)
+    val c2 = addPoints(message, scalarMultiply(k, publicKey))
+    (c1, c2)
+  }
+
+  /** ランダムなスカラー値を生成。
+    *
+    * @return
+    *   ランダムなスカラー値
+    */
+  def generateRandomScalar(): BigInt = {
+    val random = new SecureRandom()
+    BigInt.probablePrime(256, random).mod(p)
+  }
+
+  /** スカラー倍（点の乗算）を実装。
     *
     * @param k
     *   スカラー値
-    *
     * @param p
     *   楕円曲線上の点
-    *
     * @return
     *   スカラー倍された点
     */
@@ -58,5 +101,70 @@ class EllipticCurve(a: BigInt, b: BigInt, p: BigInt) {
       val y3 = (m * (p1.x - x3) - p1.y) % p
       Point(x3, y3)
     }
+  }
+
+  /** メッセージの復号。
+    *
+    * @param privateKey
+    *   受信者の秘密鍵
+    * @param ciphertext
+    *   暗号化されたメッセージ（点のペア）
+    * @return
+    *   復号されたメッセージ（点）
+    */
+  def decrypt(privateKey: BigInt, ciphertext: (Point, Point)): Point = {
+    val (c1, c2) = ciphertext
+    val s = scalarMultiply(privateKey, c1)
+    val message = addPoints(c2, Point(s.x, -s.y))
+    message
+  }
+
+  /** メッセージの署名を生成。
+    *
+    * @param privateKey
+    *   署名者の秘密鍵
+    * @param message
+    *   署名するメッセージ
+    * @return
+    *   署名（r, s）
+    */
+  def sign(
+      privateKey: BigInt,
+      message: Array[Byte],
+      basePoint: Point
+  ): (BigInt, BigInt) = {
+    val random = new SecureRandom()
+    val k = BigInt.probablePrime(256, random).mod(p)
+    val r = scalarMultiply(k, basePoint).x.mod(p)
+    val z = BigInt(MessageDigest.getInstance("SHA-256").digest(message)).mod(p)
+    val s = ((z + r * privateKey) * k.modInverse(p)).mod(p)
+    (r, s)
+  }
+
+  /** メッセージの署名を検証。
+    *
+    * @param publicKey
+    *   署名者の公開鍵
+    * @param message
+    *   検証するメッセージ
+    * @param signature
+    *   検証する署名（r, s）
+    * @return
+    *   署名が正しければtrue、そうでなければfalse
+    */
+  def verify(
+      publicKey: Point,
+      message: Array[Byte],
+      signature: (BigInt, BigInt),
+      basePoint: Point
+  ): Boolean = {
+    val (r, s) = signature
+    val z = BigInt(MessageDigest.getInstance("SHA-256").digest(message)).mod(p)
+    val w = s.modInverse(p)
+    val u1 = (z * w).mod(p)
+    val u2 = (r * w).mod(p)
+    val point =
+      addPoints(scalarMultiply(u1, basePoint), scalarMultiply(u2, publicKey))
+    r == point.x.mod(p)
   }
 }

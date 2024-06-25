@@ -2,7 +2,7 @@
   */
 object ECCTest {
 
-  /** プログラムのエントリポイント。楕円曲線上の点の加算を実演する。
+  /** プログラムのエントリポイント。楕円曲線上の点の加算、スカラー倍、鍵生成、 メッセージの暗号化と復号、署名と検証のデモンストレーションを行う。
     *
     * @param args
     *   コマンドライン引数（使用しない）
@@ -18,9 +18,7 @@ object ECCTest {
 
     // 楕円曲線を定義
     val curve = new EllipticCurve(a, b, p)
-
-    // 楕円曲線上の点を定義
-    val point1 = Point(
+    val basePoint = Point(
       BigInt(
         "55066263022277343669578718895168534326250603453777594175500187360389116729240"
       ),
@@ -28,19 +26,32 @@ object ECCTest {
         "32670510020758816978083085130507043184471273380659243275938904335757337482424"
       )
     )
-    val point2 = Point(
-      BigInt(
-        "89565891926547004231252920425935692360644145829622209833684344723754790825080"
-      ),
-      BigInt(
-        "12158399299693830322967808612713398636155367887041628176798871954788371653930"
-      )
+
+    // ランダムなスカラー値を秘密鍵とし、それを基点にスカラー倍を行って公開鍵を生成
+    val (privateKey, publicKey) = curve.generateKeyPair(basePoint)
+
+    println(s"Private Key: $privateKey")
+    println(s"Public Key: (${publicKey.x}, ${publicKey.y})")
+
+    // メッセージの暗号化と復号
+
+    val message = Point(BigInt("12345"), BigInt("67890"))
+    val ciphertext = curve.encrypt(publicKey, message, basePoint)
+    println(
+      s"Ciphertext: (${ciphertext._1.x}, ${ciphertext._1.y}), (${ciphertext._2.x}, ${ciphertext._2.y})"
     )
 
-    // 点の加算
-    val resultPoint = curve.addPoints(point1, point2)
+    val decryptedMessage = curve.decrypt(privateKey, ciphertext)
+    println(
+      s"Decrypted Message: (${decryptedMessage.x}, ${decryptedMessage.y})"
+    )
 
-    // 結果を表示
-    println(s"Resulting Point: (${resultPoint.x}, ${resultPoint.y})")
+    // メッセージの署名と検証
+    val signMessage = "Hello, ECC!".getBytes("UTF-8")
+    val signature = curve.sign(privateKey, signMessage, basePoint)
+    println(s"Signature: (r: ${signature._1}, s: ${signature._2})")
+
+    val isValid = curve.verify(publicKey, signMessage, signature, basePoint)
+    println(s"Signature valid: $isValid")
   }
 }
