@@ -9,6 +9,32 @@
   */
 class EllipticCurve(a: BigInt, b: BigInt, p: BigInt) {
 
+  /** スカラー倍（点の乗算)・二重加算法を使用して、楕円曲線上の点をスカラー倍する。
+    *
+    * @param k
+    *   スカラー値
+    *
+    * @param p
+    *   楕円曲線上の点
+    *
+    * @return
+    *   スカラー倍された点
+    */
+  def scalarMultiply(k: BigInt, p: Point): Point = {
+    var n = k
+    var q = p
+    var result = Point(0, 0) // 無限遠点
+
+    while (n > 0) {
+      if ((n & 1) == 1) {
+        result = addPoints(result, q)
+      }
+      q = addPoints(q, q)
+      n >>= 1
+    }
+    result
+  }
+
   /** 2つの楕円曲線上の点を加算する。
     *
     * @param p1
