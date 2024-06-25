@@ -40,5 +40,6 @@ lazy val root = (project in file("."))
       )
     ),
     // プロジェクトの設定
-    scalafmtOnCompile := true
+    scalafmtOnCompile := true,
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.18" % Test
   )
